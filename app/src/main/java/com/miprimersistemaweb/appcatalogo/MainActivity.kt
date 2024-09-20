@@ -1,5 +1,6 @@
 package com.miprimersistemaweb.appcatalogo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 
@@ -34,11 +35,38 @@ class MainActivity : AppCompatActivity() {
     }
     private fun incializarEventos(){
         btnIniciarSesion.setOnClickListener {
-            Toast.makeText(this,"iniciar sesion",Toast.LENGTH_LONG).show()
+            if (validacion()){
+                //iniciar sesion
+            }
+            //Toast.makeText(this,"iniciar sesion",Toast.LENGTH_LONG).show()
         }
         btnRegistrarse.setOnClickListener {
-            Toast.makeText(this,"registrarse",Toast.LENGTH_LONG).show()
+           // Toast.makeText(this,"registrarse",Toast.LENGTH_LONG).show()
+            irRegistroUsuario()
         }
     }
+    private fun irRegistroUsuario(){
+        val intentRegistro = Intent(this,RegistroActivity::class.java)
+        intentRegistro.putExtra("nombre","Lucila")
+        startActivity(intentRegistro)
+        finish()
+    }
+    private fun validacion():Boolean{
+        var esValido = true
+        if (txtEmail.text.toString().isBlank()){
+            txtEmail.error="Debe un correo"
+            esValido=false
+        }
+        if (txtPasswordLogin.text.toString().isBlank()){
+            txtPasswordLogin.error="Debe ingresar su contraseña"
+            esValido=false
+        }
+        if (!esValido){
+            Toast.makeText(this,"Error en los datos por favor verificar",Toast.LENGTH_LONG).show()
+        }
+
+        return esValido
+    }
+
 
 }
