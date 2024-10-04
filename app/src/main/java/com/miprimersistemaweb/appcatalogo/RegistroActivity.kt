@@ -8,10 +8,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class RegistroActivity : AppCompatActivity() {
+    //crear la variables
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
         val nombre = intent.getStringExtra("nombre")
         Toast.makeText(this,"el nombre es: $nombre",Toast.LENGTH_LONG).show()
     }
+    //crear la funcion onStart donde inicializar los componentes y las eventos
+    //
 }

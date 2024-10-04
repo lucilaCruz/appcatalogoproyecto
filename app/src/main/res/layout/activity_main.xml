@@ -23,20 +23,23 @@
             android:textStyle="bold"
             android:layout_marginBottom="40dp"
             />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
+
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="100dp"
                 android:src="@drawable/login"
                 android:contentDescription="Imagen de usuario"
                 />
-
-        </FrameLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mensaje error"
+            android:textSize="20sp"
+            android:textColor="@color/rojo"
+            android:layout_marginTop="20dp"
+            android:id="@+id/txtMensajeError"
+            android:visibility="invisible"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -22,4 +22,19 @@ class AuthRepository {
         val requestBody:RequestBody = bodyJsonString.toRequestBody("application/json".toMediaTypeOrNull())
         return service.loginapi(requestBody)
     }
+    //registrar
+    suspend fun registrar(usuario: Usuario):Response<ResponseBody>{
+        val retrofit = Retrofit.Builder().baseUrl("https://miprimersistemaweb.com").build()
+        val service = retrofit.create(AuthService::class.java)
+        val bodyJson = JSONObject()
+       /*
+       bodyJson.put("name",usuario.name)
+       bodyJson.put("email",usuario.email)
+        bodyJson.put("password",usuario.password)*/
+
+        val bodyJsonString = bodyJson.toString()
+        val requestBody:RequestBody = bodyJsonString.toRequestBody("application/json".toMediaTypeOrNull())
+        return service.registrar(requestBody)
+    }
+
 }

@@ -11,6 +11,7 @@ interface AuthService {
     @POST("api/users/login")
     suspend fun loginapi(@Body requestBody: RequestBody):Response<ResponseBody>
     //registrar
+    //users/create
     @POST("/api/users/create")
     suspend fun registrar(@Body requestBody: RequestBody):Response<ResponseBody>
 }
