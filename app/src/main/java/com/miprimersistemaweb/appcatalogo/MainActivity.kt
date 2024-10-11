@@ -2,11 +2,13 @@ package com.miprimersistemaweb.appcatalogo
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.Button
 
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnIniciarSesion: Button
     private lateinit var btnRegistrarse:Button
     private lateinit var txtMensajeError:TextView
+    //alternar visibilidad password
+    private lateinit var  icPasswordAlternar:ImageView
+    private var esPassworVisible:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val usarioDao = localBase.usuarioDao()
         val usuario = usarioDao.listar()
         if (usuario!=null){
-            //ir home
+            //ir catalogo
             irHome()
         }else{
             inicializarComponentes()
@@ -56,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         btnIniciarSesion = findViewById(R.id.btnIngresar)
         btnRegistrarse=findViewById(R.id.btnRegistrarLogin)
         txtMensajeError=findViewById(R.id.txtMensajeError)
+        //inicializar imagen eye
+        icPasswordAlternar = findViewById(R.id.icPasswordAlternar)
     }
     private fun incializarEventos(){
         btnIniciarSesion.setOnClickListener {
@@ -68,6 +75,22 @@ class MainActivity : AppCompatActivity() {
         btnRegistrarse.setOnClickListener {
            // Toast.makeText(this,"registrarse",Toast.LENGTH_LONG).show()
             irRegistroUsuario()
+        }
+        icPasswordAlternar.setOnClickListener{
+            alternarPasswordVisible()
+        }
+    }
+    private fun alternarPasswordVisible(){
+        if (esPassworVisible){
+            //ocultar contraseña
+            txtPasswordLogin.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            icPasswordAlternar.setImageResource(R.drawable.ic_eye_off)
+            esPassworVisible=false
+        }else{
+            //mostrar contraseña
+            txtPasswordLogin.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            icPasswordAlternar.setImageResource(R.drawable.ic_eye)
+            esPassworVisible=true
         }
     }
     private fun irRegistroUsuario(){
@@ -120,13 +143,13 @@ class MainActivity : AppCompatActivity() {
                         }else{
                             //guardar en la base el usuario
                             val usuarioBd = UsuarioBd(jsonObjetoData.getString("id").toInt(),
-                                jsonObjetoData.getString("name").toString(),
+                                    jsonObjetoData.getString("name").toString(),
                                 jsonObjetoData.getString("email").toString(),
                                 jsonObjetoData.getString("token").toString()
                                 )
                             guardarEnBd(usuarioBd)
 
-                            //ingresar al home
+                            //ingresar al catalogo
                             irHome()
                         }
 

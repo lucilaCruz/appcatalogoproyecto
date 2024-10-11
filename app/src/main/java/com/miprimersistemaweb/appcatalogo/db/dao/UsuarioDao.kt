@@ -10,8 +10,10 @@ import com.miprimersistemaweb.appcatalogo.db.entity.Usuario
 interface UsuarioDao {
     @Insert
     fun insert(vararg usuario:Usuario)
+
     @Delete
     fun eliminar(vararg usuario: Usuario)
+
     @Query("SELECT * FROM usuario")
     fun  listar():Usuario
 }

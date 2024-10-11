@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.miprimersistemaweb.appcatalogo.ui.home.HomeFragment"
+        android:name="com.miprimersistemaweb.appcatalogo.ui.catalogo.CatalogoFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_catalogo" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.miprimersistemaweb.appcatalogo.ui.gallery.GalleryFragment"
+        android:name="com.miprimersistemaweb.appcatalogo.ui.registro.RegistroFragment"
         android:label="@string/menu_producto"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_registro" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.miprimersistemaweb.appcatalogo.ui.slideshow.SlideshowFragment"
+        android:name="com.miprimersistemaweb.appcatalogo.ui.editarusuario.EditarusuarioFragment"
         android:label="@string/menu_editarusuario"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_editarusuario" />
 </navigation>

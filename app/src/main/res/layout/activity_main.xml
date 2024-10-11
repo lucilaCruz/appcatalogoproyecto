@@ -72,11 +72,17 @@
                 android:textSize="20sp"
                 />
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:id="@+id/txtPasswordLogin"
-                android:drawableEnd="@drawable/ic_pass"
+                />
+            <ImageView
+                android:id="@+id/icPasswordAlternar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_eye_off"
+                android:contentDescription="Icono de mostrar y ocultar contraseña"
                 />
         </LinearLayout>
         <Button
