@@ -87,4 +87,7 @@ dependencies {
 
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$room_version")
+
+    //coil
+    implementation("io.coil-kt.coil3:coil:3.0.0-rc01")
 }
