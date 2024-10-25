@@ -1,5 +1,6 @@
 package com.miprimersistemaweb.appcatalogo.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class ProductoAdapter:RecyclerView.Adapter<ProductoAdapter.ViewHolder>() {
         val txtPrecioProducto:TextView
         init {
             imgProducto = view.findViewById(R.id.imgProducto)
-            txtTituloProducto = view.findViewById(R.id.txtNombreUsuario)
+            txtTituloProducto = view.findViewById(R.id.txtNombreProducto)
             txtMarcaProducto = view.findViewById(R.id.txtMarcaProducto)
             txtCategoriaProducto = view.findViewById(R.id.txtCategoriaProducto)
             txtPrecioProducto = view.findViewById(R.id.txtPrecioProducto)
@@ -41,6 +42,7 @@ class ProductoAdapter:RecyclerView.Adapter<ProductoAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listaProductos.get(position)
+        Log.i("link img",item.imagen)
         holder.imgProducto.load(item.imagen)
         holder.txtTituloProducto.text = item.titulo
         holder.txtCategoriaProducto.text = item.nombreCategoria

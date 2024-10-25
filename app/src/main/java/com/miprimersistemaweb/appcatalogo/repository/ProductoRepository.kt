@@ -22,4 +22,31 @@ class ProductoRepository {
 
         return service.listarProductoSer()
     }
+    //listar categoria
+    suspend fun listarCategoria(contexto: Context):Response<ResponseBody>{
+        //conexion a la base de datos
+        val localBase = LocalDataBase.getInstance(contexto)
+        val usuarioDao = localBase.usuarioDao()
+        val usuario = usuarioDao.listar()
+        //interceptor
+        val cliente = OkHttpClient.Builder().addInterceptor(TokenInterceptor("Bearer",usuario.token)).build()
+        val retrofit = Retrofit.Builder().client(cliente).baseUrl("https://miprimersistemaweb.com").build()
+        val service = retrofit.create(ProductoService::class.java)
+        return service.listarCategoriaProducto()
+    }
+
+    //listar marca
+    suspend fun listarMarca(contexto: Context):Response<ResponseBody>{
+        //conexion a la base de datos
+        val localBase = LocalDataBase.getInstance(contexto)
+        val usuarioDao = localBase.usuarioDao()
+        val usuario = usuarioDao.listar()
+        //interceptor
+        val cliente = OkHttpClient.Builder().addInterceptor(TokenInterceptor("Bearer",usuario.token)).build()
+        val retrofit = Retrofit.Builder().client(cliente).baseUrl("https://miprimersistemaweb.com").build()
+        val service = retrofit.create(ProductoService::class.java)
+        return service.listarMarcasProducto()
+    }
+
+    //registrar producto
 }
