@@ -23,7 +23,7 @@ interface ProductoService {
     //registrar producto
     @Multipart
     @POST("/api/productos/create")
-    suspend fun registrarProducto(@Part("titulo") titulo:ResponseBody,
+    suspend fun registrarProducto(@Part("titulo") titulo:RequestBody,
                                   @Part("idmarca") idmarca:RequestBody,
                                   @Part("idcategoria") idcategoria:RequestBody,
                                   @Part("precio") precio:RequestBody,

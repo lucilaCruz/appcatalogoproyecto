@@ -16,6 +16,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -100,9 +101,22 @@ class RegistroFragment : Fragment() {
         }
     }
     private fun validar():Boolean{
-        return true
+        var esValido = true
+        if(txtTituloProducto.text.toString().isBlank()){
+            txtTituloProducto.error = "Ingresar el nombre del producto"
+            esValido = false
+        }
+        if(txtPrecioProducto.text.toString().isBlank()){
+            txtPrecioProducto.error = "Ingresar el precio del producto"
+            esValido = false
+        }
+        return esValido
+    }
+    private fun mostrarMensaje(mensaje :String){
+        Toast.makeText(this.requireContext(),mensaje,Toast.LENGTH_LONG).show()
     }
     private fun guardarProductoApi(){
+
 
     }
     private fun cargarCategoriaApi(){
