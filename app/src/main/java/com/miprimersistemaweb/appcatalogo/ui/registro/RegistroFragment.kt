@@ -25,6 +25,7 @@ import com.google.gson.JsonParser
 import com.miprimersistemaweb.appcatalogo.R
 import com.miprimersistemaweb.appcatalogo.beans.Categoria
 import com.miprimersistemaweb.appcatalogo.beans.Marca
+import com.miprimersistemaweb.appcatalogo.beans.Producto
 import com.miprimersistemaweb.appcatalogo.databinding.FragmentRegistroBinding
 import com.miprimersistemaweb.appcatalogo.repository.ProductoRepository
 import kotlinx.coroutines.CoroutineScope
@@ -116,7 +117,43 @@ class RegistroFragment : Fragment() {
         Toast.makeText(this.requireContext(),mensaje,Toast.LENGTH_LONG).show()
     }
     private fun guardarProductoApi(){
-
+        val productoRepository = ProductoRepository()
+        val contexto = this.requireContext()
+        val producto = Producto(0,txtTituloProducto.text.toString(),txtPrecioProducto.text.toString().toDouble(),
+            "","","",marcaSeleccionada.toInt(),categoriaSeleccionada.toInt())
+        CoroutineScope(Dispatchers.IO).launch{
+            val respuesta = productoRepository.registrarProdcucto(contexto,producto,imagenUri)
+            try {
+                withContext(Dispatchers.Main){
+                    if (respuesta.isSuccessful) {
+                        //100,200,300
+                        val gson = GsonBuilder().setPrettyPrinting().create()
+                        val prettyJson = gson.toJson(JsonParser.parseString(respuesta.body()?.string()))
+                        //convertir el json a un objeto
+                        val jsonObjeto = JSONObject(prettyJson)
+                        Log.i("registro producto",prettyJson)
+                        if(jsonObjeto.has("message")){
+                            //mensajee
+                            mostrarMensaje(jsonObjeto.getString("message"))
+                        }else{
+                            //limpiar campos
+                            mostrarMensaje(jsonObjeto.getString("data"))
+                            //limpiar campos
+                            txtPrecioProducto.setText("")
+                            txtTituloProducto.setText("")
+                            imgProducto.setImageResource(R.drawable.imagen_defecto)
+                        }
+                    }else {
+                        //400,500
+                        val gson = GsonBuilder().setPrettyPrinting().create()
+                        val prettyJson = gson.toJson(JsonParser.parseString(respuesta.errorBody()?.string()))
+                        Log.i("respuesta registro producto ",prettyJson)
+                    }
+                }
+            }catch (error:Exception){
+                Log.i("Error registro de producto",error.message.toString())
+            }
+        }
 
     }
     private fun cargarCategoriaApi(){
